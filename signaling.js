@@ -1,15 +1,16 @@
 const crypto = require('crypto')
+const config = require('./config')
 const knex = require('./helpers/knex')
 const iceServers = [
   {
-    "urls": [process.env.TURN_URL],
-    "username": process.env.TURN_USER,
-    "credential": process.env.TURN_CREDENTIAL
+    "urls": [config.TURN_URL],
+    "username": config.TURN_USER,
+    "credential": config.TURN_CREDENTIAL
   },
   {
-    "urls": [process.env.STUN_URL],
-    "username": process.env.STUN_USER,
-    "credential": process.env.STUN_CREDENTIAL
+    "urls": [config.STUN_URL],
+    "username": config.STUN_USER,
+    "credential": config.STUN_CREDENTIAL
   }
 ]
 

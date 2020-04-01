@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "knex": "npx knex --knexfile=./db/config.js ",
-    "start": "node index.js"
+    "start": "node index.js",
+    "heroku:remote": "heroku git:remote -a vc-signaling"
   },
   "author": "",
   "license": "ISC",

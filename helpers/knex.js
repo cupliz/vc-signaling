@@ -1,7 +1,7 @@
 const crypto = require('crypto')
 const KnexQueryBuilder = require('knex/lib/query/builder')
-const config = require('../db/config.js')
-const knex = require('knex')(config)
+const dbConfig = require('../db/config.js')
+const knex = require('knex')(dbConfig)
 
 KnexQueryBuilder.prototype.paginate = async function (per_page, current_page) {
   const page = Math.max(current_page || 1, 1)
