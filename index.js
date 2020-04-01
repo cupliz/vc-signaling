@@ -15,10 +15,7 @@ const Signaling = require('./signaling')
 
 let server = null
 const app = express()
-// const redisAdapter = ioRedis({
-//   host: config.REDIS_HOST,
-//   port: config.REDIS_PORT,
-// })
+
 if (config.ENABLE_SSL) {
   const credentials = {
     key: fs.readFileSync(config.CERT_PATH + '/privkey.pem', 'utf8'),
@@ -33,8 +30,22 @@ if (config.ENABLE_SSL) {
 }
 
 // Master code
-io.attach(server)
-io.set('origins', '*:*')
+app.use(cors())
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
+app.use('/static', express.static(path.join(__dirname, './static')))
+app.use('/.well-known/acme-challenge/', express.static(path.join(__dirname, './static')))
+app.get('/', (req, res) => {
+  res.json({ version: 200402 })
+})
+server.listen(config.SOCKET_PORT, () => {
+  console.log('Server started on port ' + config.SOCKET_PORT);
+})
+
+// const redisAdapter = ioRedis({
+//   host: config.REDIS_HOST,
+//   port: config.REDIS_PORT,
+// })
 // io.adapter(redisAdapter)
 // redisClient.on("error", error => {
 //   console.error('Can`t connect to Redis: ' + error)
@@ -42,21 +53,9 @@ io.set('origins', '*:*')
 // redisClient.on("connect", message => {
 //   console.error('Connected to Redis')
 // })
-server.listen(config.SOCKET_PORT)
-server.once('listening', () => {
-  console.log('Socket server started on port ' + config.SOCKET_PORT);
-})
-
-app.use(cors())
-app.use(bodyParser.urlencoded({ extended: false }))
-app.use(bodyParser.json())
-app.use('/static', express.static(path.join(__dirname, './static')))
-app.use('/.well-known/acme-challenge/', express.static(path.join(__dirname, './static')))
-app.get('/v1', (req, res) => {
-  res.json({ version: 200402 })
-})
 
 // Worker code
+io.set('origins', '*:*')
 io.listen(server, { 'pingInterval': 500, 'timeout': 2000 });
 io.sockets.on('connection', socket => {
   Signaling(io, socket)

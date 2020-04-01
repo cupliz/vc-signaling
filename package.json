@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "knex": "npx knex --knexfile=./db/config.js ",
     "start": "node index.js",
+    "knex": "npx knex --knexfile=./db/config.js ",
     "heroku:remote": "heroku git:remote -a vc-signaling"
   },
   "author": "",
@@ -23,5 +23,8 @@
     "sqlite3": "^4.1.1",
     "sticky-session": "^1.1.2",
     "uuid": "^7.0.3"
+  },
+  "engines": {
+    "node": "10.15.3"
   }
 }
