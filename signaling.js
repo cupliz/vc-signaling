@@ -25,6 +25,7 @@ const emitResult = (io, socket, cmd, result) => {
 }
 const countGuestIdle = async (io) => {
   const result = await knex('calls').count('id as idle').where('status', 'open').first()
+  console.log('idle guest: ', result)
   io.emit('/v1/stream/idle', result)
 }
 const Signaling = (io, socket) => {
