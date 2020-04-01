@@ -1,0 +1,26 @@
+{
+  "name": "signaling",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "knex": "npx knex --knexfile=./db/config.js ",
+    "start": "node index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "knex": "^0.20.13",
+    "mysql": "^2.18.1",
+    "redis": "^3.0.2",
+    "redlock": "^4.1.0",
+    "socket.io": "^2.3.0",
+    "socket.io-redis": "^5.2.0",
+    "sqlite3": "^4.1.1",
+    "sticky-session": "^1.1.2",
+    "uuid": "^7.0.3"
+  }
+}
