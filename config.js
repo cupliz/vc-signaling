@@ -1,5 +1,5 @@
 module.exports = {
-  ENABLE_SSL: process.env.ENABLE_SSL || false,
+  ENABLE_SSL: process.env.ENABLE_SSL || 'false',
   CERT_PATH: process.env.CERT_PATH || './cert',
   SOCKET_PORT: process.env.SOCKET_PORT || '8890',
   REST_PORT: process.env.REST_PORT || '8850',

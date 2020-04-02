@@ -29,18 +29,16 @@ const countGuestIdle = async (io) => {
   io.emit('/v1/stream/idle', result)
 }
 const Signaling = (io, socket) => {
+  console.log('connect', socket.id)
 
   // const device = crypto.randomBytes(16).toString('hex')
   io.to(socket.id).emit('/v1/ready', { iceServers })
-  
+
   socket.on('error', (error) => {
     emitResult(io, socket, '/v1/error', { message: error })
     console.error('Socket error:' + error, socket.handshake.address)
   })
-  socket.on('connect', (e) => { 
-    console.log('connect', socket.id)
-  })
-  socket.on('disconnect', (e) => { 
+  socket.on('disconnect', (e) => {
     console.log('disconnect', socket.id)
   })
 
